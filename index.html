@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №5</title>
+    <style>
+        /* === Властивості шрифтів та базова стилізація (Варіант 3) === */
+        body {
+            font-family: 'Gill Sans MT', Helvetica, Cochin, Impact, cursive, sans-serif;
+            font-weight: 500;
+            font-size-adjust: 0.58;
+            font-variant: small-caps;
+            font-style: normal;
+            font-stretch: expanded;
+            background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+            color: #2c3e50;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+        }
+
+        h1 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            text-transform: capitalize;
+            text-decoration: underline;
+            word-spacing: 2px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .pre-text {
+            white-space: pre;
+            background: #ffffff;
+            padding: 12px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+
+        /* === Властивості для друку та звуку (Варіант 3) === */
+        @media print {
+            @page { size: landscape; marks: cross; }
+            body { page-break-after: always; orphans: 3; widows: 3; }
+        }
+
+        .sound-style {
+            volume: medium;
+            play-during: url('sound.mp3') repeat mix;
+            cue-before: url('cue.wav');
+            pause-after: 20ms;
+            azimuth: behind;
+            elevation: lower;
+            speech-rate: fast;
+            pitch-range: 50;
+            stress: 60;
+            richness: 80;
+            speak: spell-out;
+            speak-punctuation: code;
+        }
+
+        /* === Стильні інтерфейсні елементи форми === */
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        fieldset {
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+            color: #3498db;
+            font-size: 16px;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        input[type="url"],
+        input[type="week"],
+        input[type="month"],
+        input[type="datetime-local"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: all 0.2s ease-in-out;
+            outline: none;
+            background-color: #f8fafc;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-top: 6px;
+        }
+
+        .radio-group label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            cursor: pointer;
+        }
+
+        progress, meter {
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        details {
+            background: #f7fafc;
+            border: 1px solid #edf2f7;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-top: 14px;
+        }
+
+        details p {
+            margin: 8px 0 0 0;
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button[type="submit"], input[type="reset"] {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        input[type="reset"] {
+            background-color: #edf2f7;
+            color: #4a5568;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #e2e8f0;
+        }
+
+        input[type="image"] {
+            margin-top: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="sound-style">Лабораторна робота №5</h1>
+        
+        <div class="pre-text">Тема: Проєктування веб-документів. Сторінка форм.</div>
+
+        <!-- Тег <form>: dir, target, accept-charset, id, action -->
+        <form id="myForm" action="#" target="_self" accept-charset="UTF-8" dir="ltr">
+            
+            <!-- Тег <legend>: lang, id, dir -->
+            <fieldset>
+                <legend id="leg1" lang="uk" dir="ltr">Заповнення даних</legend>
+
+                <!-- Тег <label>: lang, title, class -->
+                <label for="inpUrl" lang="uk" title="Введіть URL" class="sound-style">Сайт (URL):</label>
+                <!-- Тег <input>: alt, lang, maxlength, pattern, width, class, minlength, dirname -->
+                <input type="url" id="inpUrl" name="my_url" alt="URL" lang="uk" minlength="5" maxlength="50" pattern="https://.*" width="200" class="inp" dirname="url.dir" placeholder="https://example.com">
+
+                <label>Тиждень (Week):</label>
+                <input type="week" name="my_week">
+
+                <label>Місяць (Month):</label>
+                <input type="month" name="my_month">
+
+                <label>Дата та час (Datetime-local):</label>
+                <input type="datetime-local" name="my_datetime">
+
+                <label>Пароль (Password):</label>
+                <input type="password" name="my_pass" placeholder="••••••••">
+
+                <label>Стать (Radio):</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="m"> Чоловіча</label>
+                    <label><input type="radio" name="gender" value="f"> Жіноча</label>
+                </div>
+
+                <!-- Тег <optgroup>: disabled, id, label -->
+                <label>Категорія:</label>
+                <select name="cat">
+                    <optgroup id="grp1" label="Активні">
+                        <option value="1">Студент</option>
+                        <option value="2">Викладач</option>
+                    </optgroup>
+                    <optgroup id="grp2" label="Заблоковані" disabled>
+                        <option value="3">Гість</option>
+                    </optgroup>
+                </select>
+
+                <!-- Тег <textarea>: placeholder, minlength, cols, dirname, name, rows, lang -->
+                <label>Текст (Textarea):</label>
+                <textarea name="my_text" placeholder="Введіть свій коментар..." minlength="3" cols="30" rows="3" lang="uk" dirname="text.dir"></textarea>
+
+                <!-- Тег <progress>: id, lang, class -->
+                <label>Прогрес заповнення:</label>
+                <progress id="prog1" lang="uk" class="bar" value="65" max="100"></progress>
+
+                <!-- Тег <meter>: style, low, dir, high, title -->
+                <label>Вимірник (Meter):</label>
+                <meter style="width:100%" low="20" high="80" max="100" value="60" dir="ltr" title="Рівень"></meter>
+
+                <!-- Тег <summary>: lang, dir, style -->
+                <details>
+                    <summary lang="uk" dir="ltr" style="font-weight:bold; cursor:pointer; color:#3498db;">Підказка</summary>
+                    <p>Перевірте правильність заповнення полів перед надсиланням.</p>
+                </details>
+
+                <!-- Тег <input type="image">: src, alt, formenctype, formtarget -->
+                <label>Кнопка-картинка:</label>
+                <input type="image" src="https://via.placeholder.com/120x35/3498db/ffffff?text=Надіслати" alt="Submit" formenctype="multipart/form-data" formtarget="_self">
+
+                <!-- Тег <keygen>: form, keytype, id, title, autofocus -->
+                <label>Keygen:</label>
+                <keygen form="myForm" keytype="rsa" id="kg1" title="Ключ" autofocus>
+
+                <div class="btn-group">
+                    <!-- Кнопка скидання type="reset" -->
+                    <input type="reset" value="Скинути">
+                    <!-- Тег <button>: formmethod, value, autofocus, type -->
+                    <button type="submit" value="go" formmethod="get" autofocus>Відправити</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>
